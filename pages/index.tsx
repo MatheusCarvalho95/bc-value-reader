@@ -58,7 +58,7 @@ const Home = ({ total, filters }: IPageProps) => {
 
 export default Home;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: any) {
   let filters = ctx.query;
   Object.keys(ctx.query).map((key) => {
     if (ctx.query[key]) {
