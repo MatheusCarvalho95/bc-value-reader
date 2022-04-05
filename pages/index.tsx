@@ -13,8 +13,8 @@ interface IPageProps {
 const Home = ({ total, filters }: IPageProps) => {
   const [totalValue, setTotalValue] = useState<number>(total);
   const [dateRange, setDateRange] = useState([
-    new Date(filters.startDate),
-    new Date(filters.endDate),
+    new Date(filters?.startDate),
+    new Date(filters?.endDate),
   ]);
 
   const router = useRouter();
@@ -66,11 +66,11 @@ export async function getServerSideProps(ctx: any) {
     }
   });
 
-  if (!filters) {
+  if (!filters.startDate) {
     filters = {
-      startDate: dayjs(
-        new Date(Date.now()).setMonth(new Date(Date.now()).getMonth() - 12),
-      ).format("DD/MM/YYYY"),
+      startDate: dayjs(new Date(Date.now()))
+        .subtract(12, "month")
+        .format("DD/MM/YYYY"),
       endDate: dayjs(new Date()).format("DD/MM/YYYY"),
     };
   }
